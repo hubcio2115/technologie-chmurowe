@@ -59,6 +59,21 @@ services:
       context: lab03/zad3/app
       dockerfile: ./Dockerfile
     ports:
-      - 3000:3000
+      - 3000:3000 
+  lab04zad1:
+    build:
+      context: lab04/zad1
+      dockerfile: ./Dockerfile
+    volumes:
+      - nginx_data:/usr/share/nginx/html
+  lab04zad2:
+    build:
+      context: lab04/zad2
+      dockerfile: ./Dockerfile
+    volumes:
+      - node_data:/app
+    
 volumes:
- mongodb:
+  nginx_data:
+  node_data:
+  mongodb:
