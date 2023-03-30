@@ -72,8 +72,43 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - node_data:/app
-    
+  lab05zad1:
+    build:
+      context: lab05/zad1
+      dockerfile: ./Dockerfile
+  lab05zad2:
+    build:
+      context: lab05/zad2
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+  lab05zad3:
+    build:
+      context: lab05/zad3
+      dockerfile: ./Dockerfile
+      args:
+        PYTHON_VERSION: 3.11
+  lab05zad4:
+    build:
+      context: lab05/zad4
+      dockerfile: ./Dockerfile
+      args:
+        PYTHON_VERSION: 3.10.10-r0
+    environment:
+      APP_PORT: 8080
+      PYTHON_VERSION: 3.10.10-r0
+    ports:
+      - 8080:8080
+    volumes:
+      - python_data:/usr/myapp
+  lab05zad5:
+    build:
+      context: lab05/zad5
+      dockerfile: ./Dockerfile
+    ports:
+      - 81:81
 volumes:
   nginx_data:
   node_data:
+  python_data:
   mongodb:
