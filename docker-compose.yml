@@ -127,7 +127,31 @@ services:
       - my_network
     ports:
       - 5432:5432
+  lab07zad1:
+    image: mongo:${MONGO_VERSION}
+    container_name: db
+    networks:
+      - net_A
+    volumes:
+      - mongodb:/data/db
+    ports:
+      - ${MONGO_PORT}:27017
+  lab07zad2:
+    build:
+      context: lab07/zad2
+      dockerfile: ./Dockerfile
+    container_name: server
+    networks:
+      - net_A
+    depends_on:
+      - lab07zad1
+    ports:
+      - 3003:3000
 networks:
+  net_A:
+    driver: bridge
+    driver_opts:
+      parent: en0
   frontend-network:
     driver: bridge
     driver_opts:
