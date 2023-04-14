@@ -127,36 +127,6 @@ services:
       - my_network
     ports:
       - 5432:5432
-  lab06zad3-frontend:
-    container_name: frontend
-    build:
-      context: lab06/zad3/frontend
-      dockerfile: ./Dockerfile
-    networks:
-      - frontend-network
-    ports:
-      - 5173:5173
-  lab06zad3-backend:
-    container_name: backend
-    build:
-      context: lab06/zad3/backend
-      dockerfile: ./Dockerfile
-    networks:
-      - frontend-network
-      - backend-network    
-    ports:
-      - 80:80
-  lab06zad3-db:
-    container_name: db
-    build:
-      context: lab06/zad3/db
-      dockerfile: ./Dockerfile
-    environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
-    networks:
-      - backend-network
-    ports:
-      - 5432:5432
 networks:
   frontend-network:
     driver: bridge
