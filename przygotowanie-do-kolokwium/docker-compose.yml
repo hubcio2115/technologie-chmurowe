@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    image: app
+    build:
+      dockerfile: ./Dockerfile
+      args:
+        GIT_REPO: https://github.com/hubcio2115/snake.git
+    ports:
+      - 80:80
+
+networks:
+  app_network:
+    driver: bridge
+    driver_opts:
+      parent: eth0
