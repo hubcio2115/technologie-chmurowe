@@ -1,0 +1,31 @@
+
+version: '3.8'
+
+services:
+  lab03zad1:
+    build:
+      context: zad1
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./zad1/index.html:/usr/share/nginx/html/index.html
+  lab03zad2:
+    build:
+      context: zad2
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:81
+  lab03zad3-nginx:
+    build:
+      context: zad3/nginx
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
+  lab03zad3-app:
+    container_name: app
+    build:
+      context: zad3/app
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000 

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  lab02zad1:
+    image: lab02zad1
+    build:
+      context: zad1
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8080:8080
+  lab02zad2:
+    image: zad2
+    build:
+      context: lab02/zad2
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8080:8080
+  lab02zad3:
+    build:
+      context: zad3
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8080:8080
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+
+volumes:
+  mongodb:
