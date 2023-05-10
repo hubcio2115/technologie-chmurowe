@@ -2,8 +2,30 @@ version: '3.8'
 
 services:
   lab08zad1:
+    container_name: api
     build:
       context: ./zad1
       dockerfile: ./Dockerfile
     ports:
       - 8080:8080
+  lab08zad2-api:
+    build:
+      context: ./zad2
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - backend_network
+  lab08zad2-db:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    networks:
+      - backend_network
+
+networks:
+  backend_network:
+    driver: bridge
+    driver_opts:
+      parent: en0
