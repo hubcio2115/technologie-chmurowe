@@ -7,4 +7,8 @@ COPY . .
 RUN chown -R node /usr/src/app
 USER node
 RUN npm run build
+
+HEALTHCHECK --interval=10s --timeout=10s --retries=3 \
+  CMD curl -f http://localhost:3000/ready || exit 1
+
 CMD ["npm", "run", "start"]
