@@ -8,6 +8,7 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 8080:8080
+
   lab08zad2-api:
     build:
       context: ./zad2
@@ -16,6 +17,7 @@ services:
       - 3000:3000
     networks:
       - backend_network
+
   lab08zad2-db:
     image: redis
     container_name: redis
@@ -23,6 +25,48 @@ services:
       - 6379:6379
     networks:
       - backend_network
+
+  lab08zad3-redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    networks:
+      - backend_network
+
+  lab08zad3-postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - 5432:5432
+    networks:
+      - backend_network
+    environment:
+      - POSTGRES_PASSWORD=postgres
+
+  lab08zad3-nginx:
+    container_name: nginx
+    build:
+      context: zad3/nginx
+      dockerfile: ./Dockerfile
+    networks:
+      - backend_network
+    ports:
+      - 80:80
+    depends_on:
+      - lab08zad3-express
+    
+  lab08zad3-express:
+    build:
+      context: zad3/express
+      dockerfile: ./Dockerfile
+    networks:
+      - backend_network
+    ports: 
+      - 3000:3000
+    depends_on:
+      - lab08zad3-redis
+      - lab08zad3-postgres
 
 networks:
   backend_network:
