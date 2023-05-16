@@ -6,10 +6,30 @@ services:
       context: zad1
       dockerfile: ./Dockerfile
     ports:
-    - 3000:3000 
+      - 3000:3000
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:3000/live || exit 1"]
+      test:
+        [
+          "CMD-SHELL",
+          "curl -f http://localhost:3000/live || exit 1"
+        ]
       interval: 5s
       timeout: 10s
       retries: 3
+
+  lab09zad2-api:
+    build:
+      context: zad2
+      dockerfile: ./Dockerfile
+    platform: linux/arm64
+    ports:
+      - 3000:3000
+    depends_on:
+      - lab09zad2-db
+
+  lab09zad2-db:
+    image: mongo
+    platform: linux/amd64
+    ports:
+      - 27017:27017
